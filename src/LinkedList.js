@@ -2,17 +2,15 @@ import { Node } from "./Node.js";
 
 export class LinkedList {
 
-    constructor(head = null) {
-        this.head = head;
-    }
+    constructor() { }
 
-    append(value) {
-        if (!this.head) this.head = new Node(value);
+    append(key, value) {
+        if (!this.head) this.head = new Node(key, value);
         else {
             let currentNode = this.head;
             while (currentNode) {
                 if (!currentNode.nextNode) {
-                    currentNode.nextNode = new Node(value);
+                    currentNode.nextNode = new Node(key, value);
                     break;
                 }
                 else currentNode = currentNode.nextNode;
@@ -20,11 +18,11 @@ export class LinkedList {
         }
     }
 
-    prepend(value) {
-        if (!this.head) this.head = new Node(value);
+    prepend(key, value) {
+        if (!this.head) this.head = new Node(key, value);
         else {
             const oldHead = this.head;
-            const newNode = new Node(value);
+            const newNode = new Node(key, value);
 
             this.head = newNode;
             newNode.nextNode = oldHead;
@@ -64,14 +62,11 @@ export class LinkedList {
         return tail.value;
     }
 
-    at(index) {
+    at(key) {
         let currentNode = this.head;
-        let counter = 0;
 
         while (currentNode) {
-            if (counter === index) return currentNode.value;
-
-            counter++;
+            if (currentNode.key === key) return currentNode;
             currentNode = currentNode.nextNode;
         }
 
@@ -86,10 +81,10 @@ export class LinkedList {
         return thisHead.value;
     }
 
-    contains(value) {
+    contains(key) {
         let currentNode = this.head;
         while (currentNode) {
-            if (currentNode.value === value) return true;
+            if (currentNode.key === key) return true;
             currentNode = currentNode.nextNode;
         }
 
@@ -176,25 +171,70 @@ export class LinkedList {
         return undefined;
     }
 
-    removeAt(idx) {
+    remove(key) {
         if (!this.head) return null;
 
         let currentNode = this.head;
-        let counter = 0;
+        let prevNode = null;
 
-        if (idx === 0) {
+        if (currentNode.key === key) {
             this.head = currentNode.nextNode;
-        } else {
-            let prevNode = null;
-
-            while (currentNode) {
-                if (idx === counter) break;
-                prevNode = currentNode;
-                counter++;
-                currentNode = currentNode.nextNode;
-            }
-
-            prevNode.nextNode = currentNode.nextNode;
+            return true;
         }
+
+        let verdict = false;
+        while (currentNode) {
+            if (currentNode.key === key) {
+                prevNode.nextNode = currentNode.nextNode;
+                verdict = true;
+                break;
+            }
+            prevNode = currentNode;
+            currentNode = currentNode.nextNode;
+        }
+
+        return verdict
+    }
+
+    keys() {
+        if (!this.head) return null;
+
+        let currentNode = this.head;
+        const keys = [];
+
+        while (currentNode) {
+            keys.push(currentNode.key);
+            currentNode = currentNode.nextNode;
+        }
+
+        return [...keys];
+    }
+
+    values() {
+        if (!this.head) return null;
+
+        let currentNode = this.head;
+        const values = [];
+
+        while (currentNode) {
+            values.push(currentNode.value);
+            currentNode = currentNode.nextNode;
+        }
+
+        return [...values];
+    }
+
+    values() {
+        if (!this.head) return null;
+
+        let currentNode = this.head;
+        const entries = [];
+
+        while (currentNode) {
+            entries.push([currentNode.key, currentNode.value]);
+            currentNode = currentNode.nextNode;
+        }
+
+        return [...entries];
     }
 }
