@@ -2,10 +2,9 @@ import { Node } from "./Node.js";
 
 export class LinkedList {
 
-    head = null;
-
-
-    constructor() { }
+    constructor(head = null) {
+        this.head = head;
+    }
 
     append(value) {
         if (!this.head) this.head = new Node(value);
