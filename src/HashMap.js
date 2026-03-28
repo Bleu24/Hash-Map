@@ -25,7 +25,7 @@ export class HashMap {
         this.table = newMap.table;
         this.tableSize = newMap.tableSize;
         this.loadFactor = newMap.loadFactor;
-        this.threshold = newMap.threshold;
+        this.threshold = Math.floor(newMap.tableSize * newMap.loadFactor);
 
         for (const [key, value] of entries) {
             this.set(key, value);
