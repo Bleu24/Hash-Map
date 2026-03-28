@@ -1,8 +1,11 @@
 import { Node } from "./Node.js";
 
 export class LinkedList {
+    head = null;
 
-    constructor() { }
+    constructor() {
+        this.head = null;
+    }
 
     append(key, value) {
         if (!this.head) this.head = new Node(key, value);
@@ -176,6 +179,11 @@ export class LinkedList {
 
         let currentNode = this.head;
         let prevNode = null;
+
+        if (!currentNode.nextNode && currentNode.key === key) {
+            this.head = null;
+            return true;
+        }
 
         if (currentNode.key === key) {
             this.head = currentNode.nextNode;
