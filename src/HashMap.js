@@ -121,7 +121,7 @@ export class HashMap {
         let total = 0;
 
         for (const bucket of this.table) {
-            if (!bucket) continue;
+            if (!bucket?.head) continue;
             total += bucket.size();
         }
 
@@ -129,15 +129,18 @@ export class HashMap {
     }
 
     clear() {
-        this.table = [];
-        this.tableSize = 16;
+        const newMap = new HashMap(16, 0.75);
+        this.table = newMap.table;
+        this.tableSize = newMap.tableSize;
+        this.loadFactor = newMap.loadFactor;
+        this.threshold = Math.floor(newMap.tableSize * newMap.loadFactor);
     }
 
     keys() {
         const keys = [];
 
         for (const bucket of this.table) {
-            if (!bucket) continue;
+            if (!bucket?.head) continue;
             keys.push(...bucket.keys());
         }
 
@@ -148,7 +151,7 @@ export class HashMap {
         const values = [];
 
         for (const bucket of this.table) {
-            if (!bucket) continue;
+            if (!bucket?.head) continue;
             values.push(...bucket.values());
         }
 
@@ -159,7 +162,7 @@ export class HashMap {
         const entries = [];
 
         for (const bucket of this.table) {
-            if (!bucket) continue;
+            if (!bucket?.head) continue;
             entries.push(...bucket.entries());
         }
 
