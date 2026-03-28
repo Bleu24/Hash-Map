@@ -22,7 +22,6 @@ export class HashMap {
         // TODO: Fix hanging bug
         const entries = this.entries();
 
-
         this.table = newMap.table;
         this.tableSize = newMap.tableSize;
         this.loadFactor = newMap.loadFactor;
@@ -161,7 +160,7 @@ export class HashMap {
 
         for (const bucket of this.table) {
             if (!bucket) continue;
-            entries.push(...bucket.values());
+            entries.push(...bucket.entries());
         }
 
         return [...entries];
