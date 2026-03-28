@@ -1,5 +1,6 @@
 import { HashMap } from "./HashMap.js"
 
+
 const test = new HashMap() // or HashMap() if using a factory
 
 test.set('apple', 'red')
@@ -15,13 +16,13 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
-console.log(test.table);
-console.log(test.length())
-console.log(test.tableSize);
-
 test.set('moon', 'silver')
+test.set('moon', 'hazel')
 
-console.log(test.table);
-console.log(test.length())
-console.log(test.tableSize);
+console.log(test.entries())
+console.log(test.remove("moon"));
+console.log(test.entries())
 
+
+test.clear();
+console.log(test.entries());
