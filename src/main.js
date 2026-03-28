@@ -15,11 +15,13 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
+console.log(test.table);
 console.log(test.length())
 console.log(test.tableSize);
 
 test.set('moon', 'silver')
 
+console.log(test.table);
 console.log(test.length())
 console.log(test.tableSize);
 
