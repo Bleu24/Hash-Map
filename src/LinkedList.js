@@ -224,7 +224,7 @@ export class LinkedList {
         return [...values];
     }
 
-    values() {
+    entries() {
         if (!this.head) return null;
 
         let currentNode = this.head;
